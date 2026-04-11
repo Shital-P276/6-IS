@@ -1,0 +1,21 @@
+Step A: Generate a Private Key
+This creates a 2048-bit RSA private key named private.key.
+DOS
+openssl genrsa -out private.key 2048
+
+
+Step B: Extract the Public Key
+This extracts the public key from the private key you just created.
+DOS
+openssl rsa -in private.key -pubout -out public.key
+
+
+Step C: Create a Certificate Signing Request (CSR)
+This will prompt you for information (Country, State, Organization, etc.).
+DOS
+openssl req -new -key private.key -out request.csr
+
+Step D: Generate a Self-Signed Certificate
+This uses your private key to sign and create a certificate valid for 365 days.
+DOS
+openssl x509 -req -days 365 -in request.csr -signkey private.key -out certificate.crt
